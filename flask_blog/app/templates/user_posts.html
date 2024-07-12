@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Posts by {{ user.username }}{% endblock %}
+{% block content %}
+    <h1>Posts by {{ user.username }}</h1>
+    {% for post in posts %}
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="">
+            <div class="media-body">
+                <h5 class="mt-0"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h5>
+                <p>{{ post.content[:200] }}...</p>
+                <small class="text-muted">Posted on {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
